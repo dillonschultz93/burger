@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="on-menu">
+    <h1 class="heading">Burgers</h1>
+    <hr>
+    <h2>On The Menu</h2>
+    {{#each burgers}}
+      {{#unless this.devoued}}
+        <form class="burger-list" action="burgers/update/{{this.id}}?_method=PUT" method="POST">
+          <input type='hidden' name='devoued' value='true'>
+          <button type='submit' class="burger-btn" action="burgers/update/{{this.id}}?_method=PUT">{{this.burger_name}}</button>
+        </form>
+      {{/unless}}
+    {{/each}}
+  </div>
+  <div class="off-menu">
+    <h2 class="off-menu-heading">Sorry, we are out of...</h2>
+    {{#each burgers}}
+      {{#if this.devoued}}
+        <p>{{this.burger_name}}</p>
+      {{/if}}
+    {{/each}}
+    <h2 class="off-menu-heading">Place an order:</h2>
+    <form class="input" action="burgers/create" method="POST">
+      <div class="input-text">
+        <label for="burger-name">Burger Name</label>
+        <input type="text" name="burger_name"></input><br>
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+
